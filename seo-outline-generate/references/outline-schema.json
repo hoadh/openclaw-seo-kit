@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["title", "meta_title", "meta_description", "slug", "schema_type", "sections", "faq"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Full article title (H1), no character limit but keep under 70 chars for display"
+    },
+    "meta_title": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "SEO meta title shown in SERPs, must be under 60 characters"
+    },
+    "meta_description": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "SEO meta description shown in SERPs, must be under 160 characters"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "URL-safe slug using lowercase letters, numbers, and hyphens only"
+    },
+    "schema_type": {
+      "type": "string",
+      "enum": ["Article", "HowTo", "FAQ", "Product"],
+      "description": "Schema.org structured data type for this content"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Top-level H2 sections of the article",
+      "items": {
+        "type": "object",
+        "required": ["heading", "level", "subsections", "target_keywords"],
+        "properties": {
+          "heading": {
+            "type": "string",
+            "description": "H2 section heading text"
+          },
+          "level": {
+            "type": "integer",
+            "const": 2,
+            "description": "Heading level — always 2 for top-level sections"
+          },
+          "subsections": {
+            "type": "array",
+            "description": "H3 subsections nested under this H2",
+            "items": {
+              "type": "object",
+              "required": ["heading", "level", "notes"],
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "description": "H3 subsection heading text"
+                },
+                "level": {
+                  "type": "integer",
+                  "const": 3,
+                  "description": "Heading level — always 3 for subsections"
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "Writer instructions for this subsection: key points, data, examples to include"
+                }
+              }
+            }
+          },
+          "target_keywords": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string"},
+            "description": "Keywords from keyword_map this section must naturally incorporate"
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "description": "FAQ items derived from long-tail questions, used for FAQPage schema markup",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer_hint"],
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "Full question text as it would appear in FAQPage schema"
+          },
+          "answer_hint": {
+            "type": "string",
+            "description": "Brief writer note on what the answer should cover (not the full answer)"
+          }
+        }
+      }
+    }
+  }
+}

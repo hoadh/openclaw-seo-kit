@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["primary_keyword", "search_intent", "lsi_keywords", "long_tail", "clusters", "volume_estimate", "language"],
+  "properties": {
+    "primary_keyword": {"type": "string"},
+    "search_intent": {"enum": ["informational", "commercial", "transactional", "navigational"]},
+    "lsi_keywords": {"type": "array", "items": {"type": "string"}},
+    "long_tail": {"type": "array", "items": {"type": "string"}},
+    "clusters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "keywords": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "volume_estimate": {"enum": ["low", "medium", "high"]},
+    "language": {"enum": ["en", "vi"]}
+  }
+}

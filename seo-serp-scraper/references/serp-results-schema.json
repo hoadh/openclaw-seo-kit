@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SERP Results",
+  "description": "Schema for parsed search engine results page data",
+  "type": "object",
+  "required": ["query", "results"],
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "The search query that produced these results"
+    },
+    "results": {
+      "type": "array",
+      "description": "Organic and non-organic search results",
+      "items": {
+        "type": "object",
+        "required": ["position", "url", "title", "type"],
+        "properties": {
+          "position": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Result position (0 = featured snippet)"
+          },
+          "url": { "type": "string", "format": "uri" },
+          "title": { "type": "string" },
+          "snippet": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["organic", "featured", "video", "image", "local", "knowledge_panel"]
+          },
+          "domain": { "type": "string" }
+        }
+      }
+    },
+    "paa": {
+      "type": "array",
+      "description": "People Also Ask questions",
+      "items": {
+        "type": "object",
+        "required": ["question"],
+        "properties": {
+          "question": { "type": "string" },
+          "snippet": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      }
+    },
+    "related_searches": {
+      "type": "array",
+      "description": "Related search suggestions",
+      "items": { "type": "string" }
+    },
+    "featured_snippet": {
+      "type": ["object", "null"],
+      "description": "Featured snippet / position zero result",
+      "properties": {
+        "text": { "type": "string" },
+        "url": { "type": "string" },
+        "title": { "type": "string" },
+        "format": {
+          "type": "string",
+          "enum": ["paragraph", "list", "table", "video"]
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "total_results": { "type": "integer" },
+        "parsed_at": { "type": "string", "format": "date-time" },
+        "has_featured_snippet": { "type": "boolean" },
+        "has_paa": { "type": "boolean" },
+        "has_video_carousel": { "type": "boolean" },
+        "has_local_pack": { "type": "boolean" }
+      }
+    }
+  }
+}

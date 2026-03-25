@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Image Map",
+  "description": "Schema for image_map.json produced by seo-image-generate skill",
+  "type": "object",
+  "required": ["featured_image", "section_images"],
+  "properties": {
+    "featured_image": {
+      "type": "object",
+      "required": ["path", "alt", "width", "height"],
+      "description": "OG/hero featured image for the article",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative or absolute path to the saved image file"
+        },
+        "alt": {
+          "type": "string",
+          "maxLength": 125,
+          "description": "SEO-optimized alt text including primary keyword"
+        },
+        "width": {
+          "type": "integer",
+          "const": 1200,
+          "description": "Image width in pixels (always 1200 for featured)"
+        },
+        "height": {
+          "type": "integer",
+          "const": 630,
+          "description": "Image height in pixels (always 630 for featured)"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["webp", "png", "jpeg"],
+          "default": "webp",
+          "description": "Actual image format (target is webp)"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The generation prompt used to create this image"
+        }
+      }
+    },
+    "section_images": {
+      "type": "array",
+      "description": "One image per H2 section of the article",
+      "items": {
+        "type": "object",
+        "required": ["section_heading", "path", "alt", "width", "height"],
+        "properties": {
+          "section_heading": {
+            "type": "string",
+            "description": "The H2 heading text this image belongs to"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative or absolute path to the saved image file"
+          },
+          "alt": {
+            "type": "string",
+            "maxLength": 125,
+            "description": "SEO-optimized alt text for this section image"
+          },
+          "width": {
+            "type": "integer",
+            "const": 800,
+            "description": "Image width in pixels (always 800 for section images)"
+          },
+          "height": {
+            "type": "integer",
+            "const": 450,
+            "description": "Image height in pixels (always 450 for section images)"
+          },
+          "format": {
+            "type": "string",
+            "enum": ["webp", "png", "jpeg"],
+            "default": "webp",
+            "description": "Actual image format (target is webp)"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The generation prompt used to create this image"
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "featured_image": {
+        "path": "images/featured-best-running-shoes-for-beginners.webp",
+        "alt": "Best running shoes for beginners displayed on a wooden surface with a running track in the background",
+        "width": 1200,
+        "height": 630,
+        "format": "webp",
+        "prompt": "running shoes for beginners, hero banner composition suitable for a blog article, photorealistic, soft natural lighting, no text overlays"
+      },
+      "section_images": [
+        {
+          "section_heading": "How to Choose Running Shoes",
+          "path": "images/how-to-choose-running-shoes.webp",
+          "alt": "How to choose running shoes — person comparing two pairs of running shoes in a sports store",
+          "width": 800,
+          "height": 450,
+          "format": "webp",
+          "prompt": "Visual illustration of 'How to Choose Running Shoes', person comparing shoes in a store, photorealistic, soft natural lighting, no text overlays"
+        },
+        {
+          "section_heading": "Best Brands for Beginners",
+          "path": "images/best-brands-for-beginners.webp",
+          "alt": "Best running shoe brands for beginners arranged on a shelf with price tags visible",
+          "width": 800,
+          "height": 450,
+          "format": "webp",
+          "prompt": "Visual illustration of 'Best Brands for Beginners' related to running shoes for beginners, brands on a retail shelf, photorealistic, soft natural lighting, no text overlays"
+        }
+      ]
+    }
+  ]
+}

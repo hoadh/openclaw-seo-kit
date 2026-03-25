@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SEO Score Report",
+  "description": "Output schema for seo-score-calculator.py",
+  "type": "object",
+  "required": ["overall_score", "word_count", "language", "breakdown", "suggestions"],
+  "properties": {
+    "overall_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Aggregate SEO score (sum of all dimension scores)"
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total word count of article body (excluding frontmatter)"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["en", "vi"],
+      "description": "Content language; affects readability scoring method"
+    },
+    "breakdown": {
+      "type": "object",
+      "required": [
+        "keyword_density",
+        "readability",
+        "heading_structure",
+        "internal_links",
+        "meta_quality"
+      ],
+      "properties": {
+        "keyword_density": {
+          "type": "object",
+          "required": ["score", "details"],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20,
+              "description": "Keyword density dimension score (max 20)"
+            },
+            "details": {
+              "type": "string",
+              "description": "Human-readable density breakdown"
+            },
+            "primary_density": {
+              "type": "number",
+              "description": "Primary keyword density percentage"
+            },
+            "primary_count": {
+              "type": "integer",
+              "description": "Number of times primary keyword appears"
+            }
+          }
+        },
+        "readability": {
+          "type": "object",
+          "required": ["score"],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 25,
+              "description": "Readability dimension score (max 25)"
+            },
+            "grade_level": {
+              "type": "number",
+              "description": "Flesch-Kincaid grade level (EN only)"
+            },
+            "avg_sentence_length": {
+              "type": "number",
+              "description": "Average words per sentence"
+            },
+            "syllables_per_word": {
+              "type": "number",
+              "description": "Average syllables per word (EN only)"
+            },
+            "target": {
+              "type": "string",
+              "description": "Target range description"
+            },
+            "method": {
+              "type": "string",
+              "enum": ["flesch-kincaid-en", "sentence-length-vi"],
+              "description": "Scoring method applied"
+            }
+          }
+        },
+        "heading_structure": {
+          "type": "object",
+          "required": ["score", "issues"],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20,
+              "description": "Heading structure dimension score (max 20)"
+            },
+            "h1_count": {
+              "type": "integer",
+              "description": "Number of H1 headings found"
+            },
+            "h2_count": {
+              "type": "integer",
+              "description": "Number of H2 headings found"
+            },
+            "h3_count": {
+              "type": "integer",
+              "description": "Number of H3 headings found"
+            },
+            "issues": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of heading structure problems detected"
+            }
+          }
+        },
+        "internal_links": {
+          "type": "object",
+          "required": ["score", "count", "recommended"],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 15,
+              "description": "Internal links dimension score (max 15)"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of internal (relative) links found"
+            },
+            "recommended": {
+              "type": "integer",
+              "description": "Recommended internal link count (word_count / 300)"
+            },
+            "total_links": {
+              "type": "integer",
+              "description": "Total links including external"
+            }
+          }
+        },
+        "meta_quality": {
+          "type": "object",
+          "required": ["score", "title_length", "desc_length"],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20,
+              "description": "Meta quality dimension score (max 20)"
+            },
+            "title_length": {
+              "type": "integer",
+              "description": "Character length of meta_title"
+            },
+            "desc_length": {
+              "type": "integer",
+              "description": "Character length of meta_description"
+            },
+            "keyword_in_title": {
+              "type": "boolean",
+              "description": "Whether primary keyword appears in meta_title"
+            },
+            "keyword_in_desc": {
+              "type": "boolean",
+              "description": "Whether primary keyword appears in meta_description"
+            }
+          }
+        }
+      }
+    },
+    "suggestions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Actionable improvement suggestions ordered by impact"
+    }
+  }
+}
