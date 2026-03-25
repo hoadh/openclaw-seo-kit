@@ -8,7 +8,7 @@ metadata:
       env:
         - WORDPRESS_URL
         - WORDPRESS_TOKEN
-        - IMAGE_GEN_API_KEY
+        - GOOGLE_API_KEY
       optionalEnv:
         - SEMRUSH_API_KEY
         - CONTENT_LANG
@@ -106,7 +106,7 @@ The pipeline only advances to `publish` when `overall_score >= 70`.
 |---|---|---|
 | `WORDPRESS_URL` | Yes | Base URL of WordPress site, e.g. `https://example.com` |
 | `WORDPRESS_TOKEN` | Yes | WordPress credentials: `username:application_password` |
-| `IMAGE_GEN_API_KEY` | Yes | API key for AI image generation service (used by `seo-image-generate`) |
+| `GOOGLE_API_KEY` | Yes | API key for AI image generation service (used by `seo-image-generate`) |
 | `SEMRUSH_API_KEY` | No | SEMrush API key for keyword research data (used by `seo-keyword-research`) |
 | `CONTENT_LANG` | No | Content language code — `en` (default) or `vi` |
 | `CMS_TARGET` | No | CMS platform — `wordpress` (default) |
@@ -121,7 +121,7 @@ The pipeline only advances to `publish` when `overall_score >= 70`.
 # Set required env vars
 export WORDPRESS_URL="https://your-site.com"
 export WORDPRESS_TOKEN="username:your-app-password"
-export IMAGE_GEN_API_KEY="your-image-gen-api-key"
+export GOOGLE_API_KEY="your-image-gen-api-key"
 
 # Optional
 export SEMRUSH_API_KEY="your-semrush-key"
@@ -189,7 +189,7 @@ openclaw run seo-content-flow --from optimize --input article.md
 - **Input:** Article Markdown from step 3
 - **Output:** `image_map.json` containing paths and alt text for featured image (1200×630) and one section image per H2 heading (800×450)
 - **Key output fields:** `featured_image.path`, `featured_image.alt`, `section_images[].path`, `section_images[].alt`
-- **Env used:** `IMAGE_GEN_API_KEY` — authenticates calls to the AI image generation API
+- **Env used:** `GOOGLE_API_KEY` — authenticates calls to the AI image generation API
 - **Parallel note:** This step starts immediately after `write` and runs concurrently with the initial scoring pass of the `optimize` step where supported by the runner
 
 ### Step 5: optimize (seo-optimize-score)
@@ -248,7 +248,7 @@ Proceed with publishing as draft? [y/N]
 - The variable must be exported before running: `export CONTENT_LANG=vi`
 
 **Images step fails with 401 or no images generated:**
-- Verify `IMAGE_GEN_API_KEY` is exported and has not expired
+- Verify `GOOGLE_API_KEY` is exported and has not expired
 - Check API quota limits — some providers throttle burst requests for multiple images
 - Resume from `images` step without re-running `write`: `openclaw run seo-content-flow --from images --input article.md`
 

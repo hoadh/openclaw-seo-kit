@@ -76,7 +76,7 @@ ClawFlow orchestrations combining multiple skills
 # Set required environment variables
 export WORDPRESS_URL="https://your-site.com"
 export WORDPRESS_TOKEN="username:app_password"
-export IMAGE_GEN_API_KEY="your-api-key"
+export GOOGLE_API_KEY="your-api-key"
 
 # Optional
 export SEMRUSH_API_KEY="your-semrush-key"
@@ -189,7 +189,7 @@ Input Keyword
 ```bash
 WORDPRESS_URL              # WordPress site URL
 WORDPRESS_TOKEN            # username:app_password
-IMAGE_GEN_API_KEY         # AI image generation API key
+GOOGLE_API_KEY         # AI image generation API key
 ```
 
 ### Optional
@@ -224,7 +224,7 @@ Quick reference for common issues:
 |-------|-----------|-----------|
 | No search results | Try broader keyword | [Troubleshooting](./seo-troubleshooting.md#step-1) |
 | Score < 70 | Review score_report.json suggestions | [Troubleshooting](./seo-troubleshooting.md#step-5) |
-| Image generation fails | Check IMAGE_GEN_API_KEY | [Troubleshooting](./seo-troubleshooting.md#step-4) |
+| Image generation fails | Check GOOGLE_API_KEY | [Troubleshooting](./seo-troubleshooting.md#step-4) |
 | Can't publish to WordPress | Verify REST API enabled | [Troubleshooting](./seo-troubleshooting.md#step-6) |
 | Wrong language content | Set CONTENT_LANG env var | [Troubleshooting](./seo-troubleshooting.md#step-3) |
 

@@ -187,7 +187,7 @@ seo-image-generate/
 5. Write `references/image-map-schema.json`
 6. Write SKILL.md:
    - Description: "Generate SEO-optimized thumbnail and section images with alt text for articles using AI image generation when preparing content for publishing"
-   - Requires env: [IMAGE_GEN_API_KEY], primaryEnv: IMAGE_GEN_API_KEY
+   - Requires env: [GOOGLE_API_KEY], primaryEnv: GOOGLE_API_KEY
    - Requires anyBins: [python3, python]
    - Steps: (1) read article.md, (2) run image-prompt-builder.py, (3) for each prompt call image generation API via exec, (4) save images to images/ directory, (5) generate alt text per image, (6) save image_map.json
    - Error handling: API failure -> skip that image, continue; log warnings
@@ -258,12 +258,12 @@ seo-image-generate/
 | Risk | Impact | Mitigation |
 |------|--------|------------|
 | Readability scoring inaccurate for Vietnamese | Medium | VI uses sentence-length heuristic instead of syllable-based FK; separate scoring path |
-| Image gen API costs add up in batch | Medium | Make image step optional in content-flow; skip if no IMAGE_GEN_API_KEY |
+| Image gen API costs add up in batch | Medium | Make image step optional in content-flow; skip if no GOOGLE_API_KEY |
 | Internal link suggester needs sitemap access | Low | Fall back to manual suggestions if sitemap unavailable |
 | Score inflation from gaming metrics | Low | Multiple dimensions prevent single-metric gaming; human review via approval gate |
 
 ## Security Considerations
-- IMAGE_GEN_API_KEY in env only
+- GOOGLE_API_KEY in env only
 - Image generation scripts validate response before saving (no arbitrary file writes)
 - Internal-link-suggester only reads sitemap (GET requests only)
 - No user content sent to external services beyond image gen API

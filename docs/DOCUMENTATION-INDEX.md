@@ -213,7 +213,7 @@ Contains:
 ```bash
 WORDPRESS_URL              # WordPress site URL
 WORDPRESS_TOKEN            # username:app_password
-IMAGE_GEN_API_KEY         # AI image generation API key
+GOOGLE_API_KEY         # AI image generation API key
 ```
 
 **Optional:**
@@ -253,7 +253,7 @@ HARAVAN_BLOG_ID
 ```bash
 export WORDPRESS_URL="https://your-site.com"
 export WORDPRESS_TOKEN="user:password"
-export IMAGE_GEN_API_KEY="key"
+export GOOGLE_API_KEY="key"
 ```
 
 ### Generate Article

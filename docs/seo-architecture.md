@@ -263,7 +263,7 @@ Output: Array of published URLs
 ### Required (Global)
 - `WORDPRESS_URL` — WordPress site URL
 - `WORDPRESS_TOKEN` — `username:app_password` format
-- `IMAGE_GEN_API_KEY` — AI image generation API key
+- `GOOGLE_API_KEY` — AI image generation API key
 
 ### Optional (Global)
 - `SEMRUSH_API_KEY` — For enhanced keyword research volume/difficulty data

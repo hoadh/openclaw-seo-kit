@@ -129,7 +129,7 @@ Output: image_map.json
 }
 
 Environment:
-  - IMAGE_GEN_API_KEY: required (AI image generation API key)
+  - GOOGLE_API_KEY: required (AI image generation API key)
 
 Execution: ~5-8 minutes (concurrent with optimize initial phase)
 ```
@@ -345,7 +345,7 @@ Steps:
 Environment:
   - WORDPRESS_URL: required
   - WORDPRESS_TOKEN: required
-  - IMAGE_GEN_API_KEY: required
+  - GOOGLE_API_KEY: required
   - SEMRUSH_API_KEY: optional
   - CONTENT_LANG: optional ("en" default | "vi")
   - CMS_TARGET: optional ("wordpress" default)
@@ -475,7 +475,7 @@ Resume from any point using existing output files as inputs.
 | Research: 0 search results | Try broader keyword; remove modifiers (remove "guide", "tips") |
 | Outline: Generic headings | Try more specific seed keyword; add competitor URLs manually |
 | Write: Wrong language | Set `CONTENT_LANG=vi` or `en` before running |
-| Images: 401 API error | Regenerate IMAGE_GEN_API_KEY; check quota limits |
+| Images: 401 API error | Regenerate GOOGLE_API_KEY; check quota limits |
 | Optimize: Score < 70 | Review score_report.json suggestions; edit article; re-run from optimize |
 | Publish: 401 on WordPress | Regenerate Application Password in WP Admin > Users |
 | Publish: 404 REST API | Change Permalinks to "Post name" in WP Admin > Settings |
@@ -526,7 +526,7 @@ All skills support English (en) and Vietnamese (vi):
 
 Before deploying SEO skill suite:
 
-- [ ] All env vars configured (WORDPRESS_URL, TOKEN, IMAGE_GEN_API_KEY)
+- [ ] All env vars configured (WORDPRESS_URL, TOKEN, GOOGLE_API_KEY)
 - [ ] SEMrush API key set (optional, gracefully skipped if absent)
 - [ ] WordPress site has REST API enabled (check Settings > Permalinks)
 - [ ] Image generation API quota verified

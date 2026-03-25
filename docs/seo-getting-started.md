@@ -40,7 +40,7 @@ Configure your AI image generation API:
 
 ```bash
 # Example with OpenAI DALL-E
-export IMAGE_GEN_API_KEY="sk-..."
+export GOOGLE_API_KEY="sk-..."
 
 # Or with other providers, set accordingly
 # The skill will use your provider's API format
@@ -61,7 +61,7 @@ export SEMRUSH_API_KEY="your_semrush_api_key"
 # Check all required env vars are set
 echo "WORDPRESS_URL: ${WORDPRESS_URL}"
 echo "WORDPRESS_TOKEN: ${WORDPRESS_TOKEN:0:10}***"
-echo "IMAGE_GEN_API_KEY: ${IMAGE_GEN_API_KEY:0:10}***"
+echo "GOOGLE_API_KEY: ${GOOGLE_API_KEY:0:10}***"
 echo "SEMRUSH_API_KEY: ${SEMRUSH_API_KEY:0:10}***"
 ```
 
@@ -232,14 +232,14 @@ vi optimized_article.md
 openclaw run seo-content-flow --from optimize --input optimized_article.md
 ```
 
-### Issue: "IMAGE_GEN_API_KEY invalid or quota exceeded"
+### Issue: "GOOGLE_API_KEY invalid or quota exceeded"
 
 **Cause:** API key problem or rate limiting
 
 **Fix:**
 ```bash
 # Regenerate API key and re-set
-export IMAGE_GEN_API_KEY="new_key_here"
+export GOOGLE_API_KEY="new_key_here"
 
 # Resume without re-running write
 openclaw run seo-content-flow --from images --input article.md

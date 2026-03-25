@@ -201,16 +201,16 @@ openclaw run seo-content-flow --from optimize --input article.md
 
 **Symptoms:** "Unauthorized" or "401" error; no image_map.json created
 
-**Cause:** Invalid or expired IMAGE_GEN_API_KEY
+**Cause:** Invalid or expired GOOGLE_API_KEY
 
 **Solution:**
 ```bash
 # Verify key is set
-echo $IMAGE_GEN_API_KEY
+echo $GOOGLE_API_KEY
 
 # Regenerate key from your image API provider dashboard
 # Update environment variable
-export IMAGE_GEN_API_KEY="new_key_here"
+export GOOGLE_API_KEY="new_key_here"
 
 # Resume from images step
 openclaw run seo-content-flow --from images --input article.md
@@ -614,7 +614,7 @@ curl -X GET "${HARAVAN_STORE_URL}/admin/articles.json" \
 # Export before running (same terminal session)
 export WORDPRESS_URL="..."
 export WORDPRESS_TOKEN="..."
-export IMAGE_GEN_API_KEY="..."
+export GOOGLE_API_KEY="..."
 
 # Verify they're set
 env | grep WORDPRESS

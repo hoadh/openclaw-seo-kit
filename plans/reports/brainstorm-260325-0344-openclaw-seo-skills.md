@@ -116,7 +116,7 @@ description: Batch process keyword list through content pipeline
 | `WORDPRESS_URL` + `WORDPRESS_TOKEN` | WP REST API | publish-cms |
 | `SHOPIFY_STORE` + `SHOPIFY_TOKEN` | Shopify Admin API | publish-cms |
 | `HARAVAN_STORE` + `HARAVAN_TOKEN` | Haravan API | publish-cms |
-| `IMAGE_GEN_API_KEY` | Image generation service | image-generate |
+| `GOOGLE_API_KEY` | Image generation service | image-generate |
 
 ## OpenClaw Tools Required
 - **Low-risk**: `read`, `list`, `search`, `web_search`, `web_fetch`, `memory`

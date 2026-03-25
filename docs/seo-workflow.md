@@ -26,7 +26,7 @@ Automated end-to-end SEO content generation:
 # Basic usage
 export WORDPRESS_URL="https://your-site.com"
 export WORDPRESS_TOKEN="username:app_password"
-export IMAGE_GEN_API_KEY="your-api-key"
+export GOOGLE_API_KEY="your-api-key"
 
 openclaw run seo-content-flow "best running shoes for beginners"
 ```
@@ -142,7 +142,7 @@ Input Keyword
 ### Required
 - `WORDPRESS_URL` — Your WordPress site URL
 - `WORDPRESS_TOKEN` — `username:app_password` format
-- `IMAGE_GEN_API_KEY` — AI image generation API key
+- `GOOGLE_API_KEY` — AI image generation API key
 
 ### Optional
 - `SEMRUSH_API_KEY` — For keyword volume/difficulty (gracefully skipped if absent)
@@ -155,7 +155,7 @@ Input Keyword
 |-------|----------|
 | No keyword research results | Try broader keyword; check internet connection |
 | Article scored < 70 | Review score_report.json suggestions; edit; re-run optimize |
-| Images failed to generate | Check IMAGE_GEN_API_KEY validity and quota |
+| Images failed to generate | Check GOOGLE_API_KEY validity and quota |
 | Can't publish to WordPress | Verify WORDPRESS_TOKEN and REST API enabled (Settings > Permalinks) |
 | Content in wrong language | Set CONTENT_LANG before running |
 | Resume doesn't work | Ensure output files (keyword_map.json, article.md, etc.) exist locally |
