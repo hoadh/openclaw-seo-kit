@@ -1,0 +1,19 @@
+{
+  "target": {
+    "pages": [
+      {"url": "https://mysite.com/running-shoes", "title": "Running Shoes Guide", "meta": "Best running shoes for all levels"},
+      {"url": "https://mysite.com/trail-running", "title": "Trail Running Tips", "meta": "Trail running guide for beginners"}
+    ]
+  },
+  "competitors": [
+    {
+      "domain": "competitor.com",
+      "pages": [
+        {"url": "https://competitor.com/running-shoes", "title": "Running Shoes Review", "meta": "Top running shoe reviews and ratings"},
+        {"url": "https://competitor.com/marathon-training", "title": "Marathon Training Plan", "meta": "Complete 16-week marathon training plan"},
+        {"url": "https://competitor.com/recovery-tips", "title": "Post-Run Recovery", "meta": "Recovery strategies after running"},
+        {"url": "https://competitor.com/nutrition", "title": "Runner Nutrition Guide", "meta": "Nutrition and diet tips for runners"}
+      ]
+    }
+  ]
+}

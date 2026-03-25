@@ -1,0 +1,4 @@
+{
+  "robots_txt": "User-agent: *\nDisallow: /admin/\nDisallow: /wp-login.php\nSitemap: https://example.com/sitemap.xml",
+  "sitemap_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://example.com/</loc><lastmod>2026-03-01</lastmod></url><url><loc>https://example.com/running-shoes</loc><lastmod>2026-03-15</lastmod></url><url><loc>https://example.com/beginner-guide</loc><lastmod>2026-02-20</lastmod></url></urlset>"
+}

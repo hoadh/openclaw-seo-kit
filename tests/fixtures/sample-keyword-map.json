@@ -1,0 +1,12 @@
+{
+  "primary_keyword": "running shoes for beginners",
+  "search_intent": "commercial",
+  "lsi_keywords": ["best running shoes", "beginner running gear", "comfortable running shoes", "cushioned running shoes", "running shoe guide"],
+  "long_tail": ["best running shoes for beginners 2026", "what running shoes should a beginner buy", "most comfortable running shoes for new runners"],
+  "clusters": [
+    {"name": "buying guide", "keywords": ["best running shoes", "running shoe reviews", "top rated running shoes"]},
+    {"name": "beginner tips", "keywords": ["how to start running", "beginner running gear", "first running shoes"]}
+  ],
+  "volume_estimate": "high",
+  "language": "en"
+}
