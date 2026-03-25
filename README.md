@@ -85,7 +85,7 @@ Set these before running skills that need them:
 | `HARAVAN_BLOG_ID` | seo-cms-adapter | Haravan blog ID |
 | `SEMRUSH_API_KEY` | seo-keyword-research, seo-competitor-analyze | Optional: enriches keyword data |
 | `AHREFS_API_KEY` | seo-competitor-analyze | Optional: backlink analysis |
-| `IMAGE_GEN_API_KEY` | seo-image-generate | AI image generation API key |
+| `GOOGLE_API_KEY` | seo-image-generate | Google Gemini API key (Imagen image generation) |
 | `GOOGLE_SEARCH_CONSOLE_TOKEN` | seo-technical-audit | Optional: GSC data |
 | `CMS_TARGET` | seo-publish-cms | `wordpress` (default), `shopify`, or `haravan` |
 | `CONTENT_LANG` | seo-content-write | `en` (default) or `vi` |

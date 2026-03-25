@@ -9,8 +9,10 @@ metadata:
         - python3
         - python
       env:
-        - IMAGE_GEN_API_KEY
-    primaryEnv: IMAGE_GEN_API_KEY
+        - name: GOOGLE_API_KEY
+          required: true
+          description: "Google Gemini API key for Imagen image generation"
+    primaryEnv: GOOGLE_API_KEY
 ---
 
 # seo-image-generate
@@ -28,7 +30,7 @@ Generates a featured (OG) image and one section image per H2 heading in an artic
 
 ## Requirements
 
-- `IMAGE_GEN_API_KEY` — API key for the image generation service (required)
+- `GOOGLE_API_KEY` — Google Gemini API key for Imagen image generation (required)
 - Article must be a markdown file with YAML frontmatter containing `primary_keyword`
 - `images/` output directory will be created if it does not exist
 
@@ -79,31 +81,25 @@ Output is a JSON array:
 
 ### Step 3 — Call image generation API for each prompt
 
-For each item in the prompts array, call the image generation API using `IMAGE_GEN_API_KEY`.
+For each item in the prompts array, call Google Gemini Imagen API via `gemini-image-generator.py`.
 
-Use these dimensions per image type:
-
-| Type | Width | Height |
-|---|---|---|
-| `featured` | 1200 | 630 |
-| `section` | 800 | 450 |
-
-**Example API call pattern (adapt to your provider):**
+**Batch mode** (recommended — processes all prompts at once):
 
 ```bash
-curl -X POST "https://api.imagegen.example.com/v1/generate" \
-  -H "Authorization: Bearer ${IMAGE_GEN_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "prompt": "<prompt from step 2>",
-    "width": 1200,
-    "height": 630,
-    "format": "webp"
-  }' \
-  --output "images/featured-article-slug.webp"
+python3 seo-image-generate/scripts/image-prompt-builder.py article.md | \
+  python3 seo-image-generate/scripts/gemini-image-generator.py --output-dir images/
 ```
 
-Request WebP format where supported. If the API returns PNG or JPEG, save as-is and note the actual format in `image_map.json`.
+**Single image mode:**
+
+```bash
+echo '{"prompt": "...", "width": 1200, "height": 630}' | \
+  python3 seo-image-generate/scripts/gemini-image-generator.py --output images/featured.webp
+```
+
+Dimensions are auto-set by image type (featured: 1200x630, section: 800x450). The script maps to the closest Imagen aspect ratio (16:9 for featured, 4:3 for section).
+
+Images are saved as PNG (Imagen native format). Note the actual format in `image_map.json`.
 
 ### Step 4 — Save images
 
@@ -190,13 +186,15 @@ In the `seo-content-flow` pipeline, this skill runs after `seo-content-write` an
 - Confirm the article has `## H2` headings (not just H3 or H1)
 - H2 headings must start at column 0 with exactly `## `
 
-**API call fails with 401:**
-- Verify `IMAGE_GEN_API_KEY` is exported in the shell environment
-- Check the API key has not expired or exceeded its quota
+**API call fails with 401/403:**
+- Verify `GOOGLE_API_KEY` is exported in the shell environment
+- Ensure the Gemini API is enabled in your Google Cloud project
+- Check the API key has Imagen access (generativelanguage.googleapis.com)
 
-**Generated images are wrong dimensions:**
-- Some APIs require separate width/height params; others use aspect ratio codes
-- Check your provider's API docs and adjust the curl command accordingly
+**Generated images are wrong aspect ratio:**
+- Imagen supports: 1:1, 3:4, 4:3, 9:16, 16:9
+- Featured images (1200x630) map to 16:9, sections (800x450) map to 16:9
+- Exact pixel dimensions may vary; images match the aspect ratio, not exact pixels
 
 **Alt text exceeds 125 characters:**
 - Shorten the `context` input passed to `alt-text-generator.py`
